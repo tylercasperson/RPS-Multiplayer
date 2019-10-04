@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8">
+        <title>Rock, Paper, Scissors</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+    <h2>Instructions: Select r, p, or s. Once you select your option, the computer will let you know it's answer. </h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8">
+                <div class="jumbotron">
+                    <h2>You picked <span id="user-text"><strong></strong></span></h2>
+                    <h2>The computer selected <span id="randitem"><strong></strong></span></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+        const firebaseConfig = {
+        apiKey: "AIzaSyCic4VCtBetK7liUQEpEvywBskpJ5tot9w",
+        authDomain: "rockpaperscissors-fd4ec.firebaseapp.com",
+        databaseURL: "https://rockpaperscissors-fd4ec.firebaseio.com",
+        projectId: "rockpaperscissors-fd4ec",
+        storageBucket: "rockpaperscissors-fd4ec.appspot.com",
+        messagingSenderId: "169821655260",
+        appId: "1:169821655260:web:1961792ff0a9be7a40e419"
+        };
+
+
+
+        function userselection() {
+            var userText = document.getElementById("user-text");
+            document.onkeyup = function(event) {
+                userText.textContent = event.key;
+                computers selection();
+            }
+        };
+        userselection();
+
+        function computerselection() {
+        var pick = ["rock", "paper", "sizzors"]; 
+        var randitem = pick[Math.floor(Math.random()*pick.length)];
+        document.getElementById("randitem").textContent = randitem;
+        };
+
+
+
+        //add second player version. 
+        //switch statement to determine who won.
+        //firebase will keep track of the score
+        //random variable for chat functionality
+    </script>
+</body>
+</html>
