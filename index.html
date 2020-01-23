@@ -12,8 +12,9 @@
         <div class="row">
             <div class="col-md-offset-2 col-md-8">
                 <div class="jumbotron">
-                    <h2>You picked <span id="user-text"><strong></strong></span></h2>
-                    <h2>The computer selected <span id="randomChoice"><strong></strong></span></h2>
+                    <h2>You picked <span id="player1"><strong></strong></span></h2>
+                    <h2>The computer selected <span id="player2"><strong></strong></span></h2>
+                    <h2 id="roundScore"></h2>
                 </div>
             </div>
         </div>
@@ -32,7 +33,7 @@
     };
 
     function userSelection() {
-        var userText = document.getElementById("user-text");
+        var userText = document.getElementById("player1");
         document.onkeyup = function(event) {
             switch(event.key){
                 case 'r':
@@ -48,21 +49,24 @@
                     userText.textContent = 'scissors';
                 break;
             }
+            var player1selection = document.getElementById("player1").innerText;
             if(event.key === 'r' || 's' || 'p' || '1' || '2' || '3'){
                 computerSelection();
+                var player2selection = document.getElementById("player2").innerText;
+                score(player1selection, player2selection);
             }
         }
     };
     userSelection();
 
     function computerSelection() {
-        var choices = ["rock", "paper", "sizzors"]; 
+        var choices = ["rock", "paper", "scissors"]; 
         var randomChoice = choices[Math.floor(Math.random()*choices.length)];
-        document.getElementById("randomChoice").textContent = randomChoice;
+        document.getElementById("player2").textContent = randomChoice;
     };
 
     function score(player1selection, player2selection) {
-
+        
         var scoreBreakdown = {
             'rock-paper': 'Point goes to player 2.',
             'rock-scissors': 'Point goes to player 1.',
@@ -75,9 +79,14 @@
             'scissors-scissors': 'There was a tie.'
         }
 
-        return scoreBreakdown[player1selection + '-' + player2selection];
+        document.getElementById("roundScore").textContent = (scoreBreakdown[player1selection + '-' + player2selection]);
+        return console.log(scoreBreakdown[player1selection + '-' + player2selection]);
+        
+        //target the score div
     };
     
+
+    //https://ultimatecourses.com/blog/deprecating-the-switch-statement-for-object-literals
 
 
 
