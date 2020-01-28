@@ -32,8 +32,14 @@
     appId: "1:169821655260:web:1961792ff0a9be7a40e419"
     };
 
-    function userSelection() {
-        var userText = document.getElementById("player1");
+    function userSelection(player) {
+        if(player === 'player1'){ 
+            var userText = document.getElementById("player1");
+            console.log('1');
+        } else {
+            var userText = document.getElementById("player2");
+            console.log('2');
+        }
         document.onkeyup = function(event) {
             switch(event.key){
                 case 'r':
@@ -51,19 +57,15 @@
             }
             var player1selection = document.getElementById("player1").innerText;
             if(event.key === 'r' || 's' || 'p' || '1' || '2' || '3'){
-                computerSelection();
+                userSelection('player2');
                 var player2selection = document.getElementById("player2").innerText;
                 score(player1selection, player2selection);
             }
         }
     };
-    userSelection();
+    userSelection('player1');
 
-    function computerSelection() {
-        var choices = ["rock", "paper", "scissors"]; 
-        var randomChoice = choices[Math.floor(Math.random()*choices.length)];
-        document.getElementById("player2").textContent = randomChoice;
-    };
+ 
 
     function score(player1selection, player2selection) {
         

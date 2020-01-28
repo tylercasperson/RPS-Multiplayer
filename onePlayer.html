@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Rock, Paper, Scissors</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+    <h2>Instructions: Select r, p, or s. Once you select your option, the computer will let you know it's answer. </h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8">
+                <div class="jumbotron">
+                    <h2>You picked <span id="player1"><strong></strong></span></h2>
+                    <h2>The computer selected <span id="player2"><strong></strong></span></h2>
+                    <h2 id="roundScore"></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script type="text/javascript">
+
+    const firebaseConfig = {
+    apiKey: "AIzaSyCic4VCtBetK7liUQEpEvywBskpJ5tot9w",
+    authDomain: "rockpaperscissors-fd4ec.firebaseapp.com",
+    databaseURL: "https://rockpaperscissors-fd4ec.firebaseio.com",
+    projectId: "rockpaperscissors-fd4ec",
+    storageBucket: "rockpaperscissors-fd4ec.appspot.com",
+    messagingSenderId: "169821655260",
+    appId: "1:169821655260:web:1961792ff0a9be7a40e419"
+    };
+
+    function userSelection() {
+        var userText = document.getElementById("player1");
+        document.onkeyup = function(event) {
+            switch(event.key){
+                case 'r':
+                case '1':
+                    userText.textContent = 'rock';
+                break;
+                case 'p':
+                case '2':
+                    userText.textContent = 'paper';
+                break;
+                case 's':
+                case '3':
+                    userText.textContent = 'scissors';
+                break;
+            }
+            var player1selection = document.getElementById("player1").innerText;
+            if(event.key === 'r' || 's' || 'p' || '1' || '2' || '3'){
+                computerSelection();
+                var player2selection = document.getElementById("player2").innerText;
+                score(player1selection, player2selection);
+            }
+        }
+    };
+    userSelection();
+
+    function computerSelection() {
+        var choices = ["rock", "paper", "scissors"]; 
+        var randomChoice = choices[Math.floor(Math.random()*choices.length)];
+        document.getElementById("player2").textContent = randomChoice;
+    };
+
+    function score(player1selection, player2selection) {
+        
+        var scoreBreakdown = {
+            'rock-paper': 'Point goes to player 2.',
+            'rock-scissors': 'Point goes to player 1.',
+            'rock-rock': 'There was a tie.',
+            'paper-rock': 'Point goes to player 1.',
+            'paper-scissors': 'Point goes to player 2.',
+            'paper-paper': 'There was a tie.',
+            'scissors-rock': 'Point goes to player 2.',
+            'scissors-paper': 'Point goes to player 1.',
+            'scissors-scissors': 'There was a tie.'
+        }
+
+        document.getElementById("roundScore").textContent = (scoreBreakdown[player1selection + '-' + player2selection]);    
+    
+    };
+    
+
+    //https://ultimatecourses.com/blog/deprecating-the-switch-statement-for-object-literals
+
+
+
+    //add second player version. 
+    //switch statement to determine who won.
+    //firebase will keep track of the score
+    //random variable for chat functionality
+</script>
+</body>
+</html>
