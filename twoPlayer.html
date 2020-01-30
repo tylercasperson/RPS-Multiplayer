@@ -13,6 +13,15 @@
     <h2>Instructions: Select r, p, or s. Once you select your option, the computer will let you know it's answer. </h2>
     <div class="container">
         <div class="row">
+            <div class="col-md-offset-6 col-md-6">
+                <div class="jumbotron jumbotron-fluid">
+                    <h3>Current Score: </h3>
+                    <h4 class="player1score">Player1: </h4>
+                    <h4 class="player2score">Player2: </h4>
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-offset-2 col-md-8">
                 <div class="jumbotron">
                     <h2>Player 1 picked <span id="player1"></span></h2>
@@ -43,6 +52,24 @@
 <script type="text/javascript">
 
 var database = firebase.database();
+
+function getScores() {
+    var player1spot = $(".player1score");
+    var player2spot = $(".player2score");
+    var ref = firebase.database().ref();
+    ref.on("value", function(snapshot) {
+            console.log(snapshot.val());
+            console.log(snapshot.val().RPSscore1);
+            console.log(snapshot.val().RPSscore2);
+            var pastPlayer1Score = snapshot.val().RPSscore1;
+            var pastPlayer2Score = snapshot.val().RPSscore2;
+            player1spot.text('Player1: ' + pastPlayer1Score);
+            player2spot.text('player2: ' + pastPlayer2Score);
+        }, function (error) {  
+        console.log("Error: " + error.code);
+    }) //end of error and get data
+};
+getScores();
 
 var whoWon = [];
 var bestOfThree = [];
@@ -87,18 +114,15 @@ function userSelection(player) {
             score(player1selection, player2selection);
             writeData();
 
-            function writeData() {
-                getData();
-                database.ref().set({
-                RPSplayer1: player1selection,
-                RPSplayer2: player2selection,
-                //get score and add current 
-                RPSscore1: 1,
-                RPSscore2: 2
-                });
             }
+                
+            function writeData() {
+                database.ref().set({
+                    RPSscore1: 4,
+                    RPSscore2: 4
+                    }); //end of set
+            }  //end of write data
         }
-    }
 };
     userSelection('player1');
 
