@@ -5,6 +5,7 @@
     <title>Rock, Paper, Scissors</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
 </head>
 <body>
     <h2>Instructions: Select r, p, or s. Once you select your option, the computer will let you know it's answer. </h2>
@@ -29,9 +30,12 @@
             </div>
         </div>
     </div>
-    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
-<script>
+
+<script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+
+<script type="text/javascript">
+
   // Your web app's Firebase configuration
   var firebaseConfig = {
     apiKey: "AIzaSyDQbIbuFuRhfmolhdnBfi_jpWyN1ZyNueo",
@@ -45,9 +49,6 @@
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-</script>
-
-<script type="text/javascript">
 
 var database = firebase.database();
 
@@ -68,6 +69,19 @@ function getScores() {
     }) //end of error and get data
 };
 getScores();
+
+function writeData() {
+    var player1spot = $(".player1score");
+    var player1score = Number($(".player1score").text().charAt(9));
+    console.log(player1spot);
+    var player1score = player1score + 5;
+    console.log('1: ' + player1score);
+    console.log('b: ' + player1score);
+    database.ref().set({
+        RPSscore1: player1score + 1,
+        RPSscore2: player1score + 20
+        }); //end of set
+}  //end of write data 
 
 var whoWon = [];
 var bestOfThree = [];
@@ -118,30 +132,6 @@ function userSelection(player) {
 };
     userSelection('player1');
 
-// function getData() {
-//     var ref = firebase.database().ref();
-
-//     ref.on("value", function(snapshot) {
-//         console.log(snapshot.val());
-//         console.log(snapshot.val().RPSscore1);
-//     }, function (error) {
-//     console.log("Error: " + error.code);
-//     });
-// }
-
-function writeData() {
-    var player1spot = $(".player1score");
-    var player1score = Number($(".player1score").text().charAt(9));
-    console.log(player1spot);
-    var player1score = player1score + 5;
-    console.log('1: ' + player1score);
-    console.log('b: ' + player1score);
-    database.ref().set({
-        RPSscore1: player1score + 1,
-        RPSscore2: player1score + 20
-        }); //end of set
-}  //end of write data 
-
 function score(player1selection, player2selection) {
     
     var scoreMessage = {
@@ -189,6 +179,9 @@ function score(player1selection, player2selection) {
             document.getElementById("player1").innerText = '';
             document.getElementById("player2").innerText = '';
             document.getElementById("roundScore").textContent = '';
+            turn[0] = "";
+            turn[1] = "";
+            console.log(turn);
             $(".messageBox").text("");
         })
     }

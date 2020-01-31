@@ -7,91 +7,52 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-    <h2>Instructions: Select r, p, or s. Once you select your option, the computer will let you know it's answer. </h2>
+    <h2>You are in for a treat! Rock paper scissors is a great game. Select 1/r, 2/p, or 3/s, wait for your opponent to make their selections. Detemine the winner by rock beats scissors, paper beats rock and scissors beats paper.</h2>
     <div class="container">
         <div class="row">
             <div class="col-md-offset-2 col-md-8">
-                <div class="jumbotron">
-                    <h2>You picked <span id="player1"><strong></strong></span></h2>
-                    <h2>The computer selected <span id="player2"><strong></strong></span></h2>
-                    <h2 id="roundScore"></h2>
-                </div>
+                    <div class="singlePlayer"><a href="onePlayer.html">Single Player</a></div>
+                    <button class="twoPlayer"><a href="twoPlayer.html" onclick="writeData()">Two Player</a></button>
             </div>
         </div>
     </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8">
+                <p>Learn more about Rock Paper Scissors here:</p>
+                <div class="RPSassociation"><a href="https://www.wrpsa.com/about/">Rock Paper Scissors Association</a></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
 
 <script type="text/javascript">
 
-    const firebaseConfig = {
-    apiKey: "AIzaSyCic4VCtBetK7liUQEpEvywBskpJ5tot9w",
-    authDomain: "rockpaperscissors-fd4ec.firebaseapp.com",
-    databaseURL: "https://rockpaperscissors-fd4ec.firebaseio.com",
-    projectId: "rockpaperscissors-fd4ec",
-    storageBucket: "rockpaperscissors-fd4ec.appspot.com",
-    messagingSenderId: "169821655260",
-    appId: "1:169821655260:web:1961792ff0a9be7a40e419"
-    };
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDQbIbuFuRhfmolhdnBfi_jpWyN1ZyNueo",
+    authDomain: "rockpaperscissors-d2102.firebaseapp.com",
+    databaseURL: "https://rockpaperscissors-d2102.firebaseio.com",
+    projectId: "rockpaperscissors-d2102",
+    storageBucket: "rockpaperscissors-d2102.appspot.com",
+    messagingSenderId: "600671659645",
+    appId: "1:600671659645:web:2233d1e8db5293cc54f314",
+    measurementId: "G-T8MZKXKGBB"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
 
-    function userSelection() {
-        var userText = document.getElementById("player1");
-        document.onkeyup = function(event) {
-            switch(event.key){
-                case 'r':
-                case '1':
-                    userText.textContent = 'rock';
-                break;
-                case 'p':
-                case '2':
-                    userText.textContent = 'paper';
-                break;
-                case 's':
-                case '3':
-                    userText.textContent = 'scissors';
-                break;
-            }
-            var player1selection = document.getElementById("player1").innerText;
-            if(event.key === 'r' || 's' || 'p' || '1' || '2' || '3'){
-                computerSelection();
-                var player2selection = document.getElementById("player2").innerText;
-                score(player1selection, player2selection);
-            }
-        }
-    };
-    userSelection();
+  var database = firebase.database();
 
-    function computerSelection() {
-        var choices = ["rock", "paper", "scissors"]; 
-        var randomChoice = choices[Math.floor(Math.random()*choices.length)];
-        document.getElementById("player2").textContent = randomChoice;
-    };
+  function writeData() {
+    database.ref().set({
+        RPSscore1: 0,
+        RPSscore2: 0
+        }); //end of set
+}  //end of write data 
 
-    function score(player1selection, player2selection) {
-        
-        var scoreBreakdown = {
-            'rock-paper': 'Point goes to player 2.',
-            'rock-scissors': 'Point goes to player 1.',
-            'rock-rock': 'There was a tie.',
-            'paper-rock': 'Point goes to player 1.',
-            'paper-scissors': 'Point goes to player 2.',
-            'paper-paper': 'There was a tie.',
-            'scissors-rock': 'Point goes to player 2.',
-            'scissors-paper': 'Point goes to player 1.',
-            'scissors-scissors': 'There was a tie.'
-        }
-
-        document.getElementById("roundScore").textContent = (scoreBreakdown[player1selection + '-' + player2selection]);    
-    
-    };
-    
-
-    //https://ultimatecourses.com/blog/deprecating-the-switch-statement-for-object-literals
-
-
-
-    //add second player version. 
-    //switch statement to determine who won.
-    //firebase will keep track of the score
-    //random variable for chat functionality
 </script>
-</body>
 </html>
