@@ -13,6 +13,7 @@
         <div class="row">
             <div class="col-md-offset-6 col-md-6">
                 <div class="jumbotron jumbotron-fluid">
+                    <h2>Round: <h2 class="round">1</h2></h2>
                     <h3>Current Score: </h3>
                     <h4 class="player1score">Player1: </h4>
                     <h4 class="player2score">Player2: </h4>
@@ -83,6 +84,16 @@ function writeData() {
         }); //end of set
 }  //end of write data 
 
+function nextRound() {
+    var getRound = Number($(".round").text());
+    var nextRound = getRound ++;
+    $(".round").text(nextRound);
+    
+    database.ref().set({
+        RPSround: nextRound
+        }); //end of set
+}  //end of next round 
+
 var whoWon = [];
 var bestOfThree = [];
 var turn = [];
@@ -120,13 +131,18 @@ function userSelection(player) {
             bestOfThree.push(turn);
             console.log(turn);
             score(player1selection, player2selection);
+            //adds a point to the winner
+            if(whoWon[0] === '1'){
+                console.log('player 1 won');
+            } else if(whoWon[0] === '1'){
+                console.log('player2 won')
+            }
             writeData();
             console.log();
             if(!(turn[0] === "") && !(turn[1] === "")){
                 console.log('reset');
                 reset();
             }
-        
             }    
         }
 };
@@ -159,9 +175,8 @@ function score(player1selection, player2selection) {
     }
 
     document.getElementById("roundScore").textContent = (scoreMessage[player1selection + '-' + player2selection]);    
-    whoWon.push(scoreBreakdown[player1selection + '-' + player2selection]);
+    whoWon[0] = scoreBreakdown[player1selection + '-' + player2selection];
     console.log(whoWon);
-    
 };
 
     // if (scoreBreakdown[player1selection + '-' + player2selection] === '1') {
@@ -181,6 +196,7 @@ function score(player1selection, player2selection) {
             document.getElementById("roundScore").textContent = '';
             turn[0] = "";
             turn[1] = "";
+            nextRound();
             console.log(turn);
             $(".messageBox").text("");
         })
