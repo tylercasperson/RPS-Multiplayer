@@ -57,7 +57,6 @@ var database = firebase.database();
 function getScores() {
     var player1spot = $(".player1score");
     var player2spot = $(".player2score");
-    var round = $(".round");
     var ref = firebase.database().ref();
     ref.on("value", function(snapshot) {
         console.log(snapshot.val());
@@ -78,11 +77,9 @@ getScores();
 
 function getRound(){
     var ref = firebase.database().ref();
-    var round = Number($(".round").text());
     ref.on("value", function(snapshot) {
         console.log(snapshot.val().RPSround);
         var trackRound = snapshot.val().RPSround;
-        round.text(trackRound);
     }, function (error) {  
         console.log("Error: " + error.code);
     }) //end of error and get data
@@ -114,6 +111,7 @@ var bestOfThree = [];
 var turn = [];
 
 function userSelection(player) {
+    console.log('player: ' + player);
     if(player === 'player1'){ 
         var userText = document.getElementById("player1");
         playerIndex = 0;
@@ -162,7 +160,7 @@ function userSelection(player) {
         }  
     }
 };
-    userSelection('player1');
+userSelection('player1');
 
 function score(player1selection, player2selection) {
     
@@ -204,20 +202,20 @@ function score(player1selection, player2selection) {
 
     //go through the rounds to use the reset function
 
-   function reset() {
-    
-        $(".reset").on("click", function() {
-
-            document.getElementById("player1").innerText = '';
-            document.getElementById("player2").innerText = '';
-            document.getElementById("roundScore").textContent = '';
-            turn[0] = "";
-            turn[1] = "";
-            //nextRound(); //change to read round
-            console.log(turn);
-            $(".messageBox").text("");
-        })
-    }
+function reset() {
+    $(".reset").on("click", function() {
+        document.getElementById("player1").innerText = '';
+        document.getElementById("player2").innerText = '';
+        document.getElementById("roundScore").textContent = '';
+        turn[0] = "";
+        turn[1] = "";
+        //nextRound(); //change to read round
+        console.log(turn);
+        $(".messageBox").text("");
+        $(".round").text($(".lock").text());
+        userSelection('player1');
+    })
+}
     
 
     //https://ultimatecourses.com/blog/deprecating-the-switch-statement-for-object-literals
