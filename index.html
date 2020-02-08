@@ -3,27 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title>Rock, Paper, Scissors</title>
+    <link rel="stylesheet" type="text/css" href="./assets/css/reset.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>    
 </head>
 <body>
-    <h2>You are in for a treat! Rock paper scissors is a great game. Select 1/r, 2/p, or 3/s, wait for your opponent to make their selections. Detemine the winner by rock beats scissors, paper beats rock and scissors beats paper.</h2>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-offset-2 col-md-8">
-                    <div class="singlePlayer"><a href="onePlayer.html" onclick="writeData()">Single Player</a></div>
-                    <button class="twoPlayer"><a href="twoPlayer.html" onclick="writeData()">Two Player</a></button>
+<div class="container">
+    <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+        <div class="jumbotron">
+            <h1 class="display-4">Rock Paper Scissors</h1>
+            <p class="lead">Select 1/r, 2/p, or 3/s</p>
+            <p class="lead">Wait for your opponent to make their selections.</p>
+            <p class="lead">Detemine the winner by: </p>
+                <ul>
+                    <li>rock beats scissors</li>
+                    <li>paper beats rock</li>
+                    <li>scissors beats paper</li>
+                </ul> 
+            <hr class="my-4">
+            <a class="btn btn-primary btn-lg" href="onePlayer.html" role="button">VS Computer</a>
+            <a class="btn btn-primary btn-lg" href="twoPlayer.html" role="button">VS another person</a>
+            <hr class="my-4">
+            <p>Learn more about Rock Paper Scissors here:</p>
+            <div class="RPSassociation">
+                <a href="https://www.wrpsa.com/about/">
+                    <img src="./assets/images/wrpsaLogo.png" alt="rpsLogo" class="logo">
+                </a>
             </div>
         </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-offset-2 col-md-8">
-                <p>Learn more about Rock Paper Scissors here:</p>
-                <div class="RPSassociation"><a href="https://www.wrpsa.com/about/">Rock Paper Scissors Association</a></div>
-            </div>
         </div>
     </div>
+</div>
 </body>
 
 <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>

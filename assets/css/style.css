@@ -1,0 +1,14 @@
+body{
+    display: flexbox;
+}
+.logo
+{
+    width: 200px;
+    height: auto;
+}
+.lock{
+    display: none;
+}
+textarea{
+    cols: 50;
+}
