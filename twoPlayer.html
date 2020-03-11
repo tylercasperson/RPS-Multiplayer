@@ -10,22 +10,43 @@
     
 </head>
 <body>
-    <h2>Instructions: Select 1/r, 2/p, or 3/s. Once you select your option, player 2 will need to select their option. The computer will let you know who won. </h2>
     <div class="lock">1</div>
     <div class="container">
-        <div class="row">
+        <div class="scoreRow row">
             <div class="col-md-offset-6 col-md-6">
-                <div class="jumbotron jumbotron-fluid">
-                    <h2>Round: <h2 class="round">1</h2></h2>
-                    <h3>Current Score: </h3>
-                    <h4>Player1: <h4 class="player1score"></h4></h4>
-                    <h4>Player2: <h4 class="player2score"></h4></h4>
+                <div class="jumbotron jumbotron-fluid scoreboard">
+                    <h2 class="roundArea">Round: <h2 class="roundArea nbr round">1</h2></h2>
+                    <h3 class="currentScore">Current Score: </h3>
+                    <div class="scoreLine">
+                        <h4 class="scoreArea">Player1: 
+                            <h4 class="scoreArea nbr player1score"></h4>
+                        </h4>
+                    </div>
+                    <div class="scoreLine">
+                        <h4 class="scoreArea">Player2: 
+                            <h4 class="scoreArea nbr player2score"></h4>
+                        </h4>
+                    </div>
                 </div>
             </div>
         </div>
+   
+        <div class="row multiPlayer">
+            <h4 class="col-md-12 multiInstructions instructions">Once you select your option, player 2 will need to select their option. </h4>
+            <h4 class="col-md-12 multiInstructions line2 instructions">The computer will let you know who won. 
+                <div class="p1keyboard">Keyboard options:
+                    <ul>
+                        <li>rock: 1 or r</li>
+                        <li>paper: 2 or p</li>
+                        <li> scissors: 3 or s</li>
+                    </ul>
+                </div>
+            </h4>
+        </div>
+
         <div class="row">
             <div class="col-md-offset-2 col-md-8">
-                <div class="jumbotron">
+                <div class="jumbotron multiGame">
                     <h2>Player 1 picked <span id="player1"></span></h2>
                     <h2>Player 2 selected <span id="player2"></span></h2>
                     <h2 id="roundScore"></h2>
@@ -33,13 +54,18 @@
                 </div>
             </div>
         </div>
-        <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text">Chat: </span>
-            </div>
-            <textarea class="form-control" aria-label="With textarea" cols="200" rows="8"></textarea>
-          </div>
+        
+        <div class="chatArea">
+            <p class="title">Chat: </p>
+            <textarea class="chat"></textarea>
+        </div>
 
+        <div class="winningPic">
+            <img src="./assets/images/rockWins.jpg" alt="rockWins" class="winningPic rock hide">
+            <img src="./assets/images/paperBeatsRock.jpg" alt="paperWins" class="winningPic paper hide">
+            <img src="./assets/images/scissorsBeatsPaper.jpg" alt="scissorsWins" class="winningPic scissors hide">
+        </div>
+        
     </div>
 
 <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
@@ -183,7 +209,7 @@ function score(player1selection, player2selection) {
         'scissors-rock': 'Point goes to player 2.',
         'scissors-paper': 'Point goes to player 1.',
         'scissors-scissors': 'There was a tie.'
-    }
+    };
 
     var scoreBreakdown = {
         'rock-paper': '2',
@@ -195,21 +221,32 @@ function score(player1selection, player2selection) {
         'scissors-rock': '2',
         'scissors-paper': '1',
         'scissors-scissors': '0'
+    };
+
+    var gamePlay = [player1selection + '-' + player2selection];
+
+    switch(gamePlay[0]){
+        case 'rock-scissors':
+        case 'scissors-rock':
+            document.querySelector(".rock").classList.remove("hide");
+            document.querySelector(".rock").classList.add("win");
+        break;
+        case 'rock-paper':
+        case 'paper-rock':
+            document.querySelector(".paper").classList.remove("hide");
+            document.querySelector(".paper").classList.add("win");
+        break;
+        case 'scissors-paper':
+        case 'paper-scissors':
+            document.querySelector(".scissors").classList.remove("hide");
+            document.querySelector(".scissors").classList.add("win");
+        break;
     }
 
     document.getElementById("roundScore").textContent = (scoreMessage[player1selection + '-' + player2selection]);    
     whoWon[0] = scoreBreakdown[player1selection + '-' + player2selection];
     console.log(whoWon);
 };
-
-    // if (scoreBreakdown[player1selection + '-' + player2selection] === '1') {
-    //     //firebase push score to player 1
-    //     //if after score is pushed to player 1 then it displays you won
-    // } else if (scoreBreakdown[player1selection + '-' + player2selection] === '2'){
-    //     //firebase push score to player 2
-    // }
-
-    //go through the rounds to use the reset function
 
 function reset() {
     $(".reset").on("click", function() {
@@ -222,19 +259,11 @@ function reset() {
         console.log(turn);
         $(".messageBox").text("");
         $(".round").text($(".lock").text());
+        document.querySelector(".win").classList.add("hide");
+        document.querySelector(".win").classList.remove("win");
         userSelection('player1');
     })
-}
-    
-
-    //https://ultimatecourses.com/blog/deprecating-the-switch-statement-for-object-literals
-
-
-
-    //add second player version. 
-    //switch statement to determine who won.
-    //firebase will keep track of the score
-    //random variable for chat functionality
+};
 </script>
 </body>
 </html>

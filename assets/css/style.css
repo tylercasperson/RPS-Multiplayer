@@ -69,14 +69,69 @@ body{
     display: none;
 }
 
-*{
-    border: 1pt solid black;
+.chatArea{
+    display: flex;
+    margin-top: -300px;
+    margin-right: 100px;
 }
 
+.title{
+    margin-top: -120px;
+}
+
+textarea{
+    height: 320px;
+    width: 250px;
+    margin-top: -100px;
+}
+
+.scoreRow{
+    display: flexbox;
+    margin-left: 980px;
+}
+
+.scoreboard{
+    display: block;
+    width: 280px;
+    height: 260px;
+    margin-top: 10px;
+}
+
+.scoreLine{
+    display: block;
+    text-align: end;
+}
+
+.roundArea, .scoreArea{
+    display: inline-block;
+    margin-top: -20px;
+}
+
+.nbr{
+    margin-left: 10px;
+}
+
+.multiPlayer{
+    margin-top: -250px;
+    background-color: gainsboro;
+    display: block;
+    height: 500px;
+}
+
+.multiInstructions{
+    margin-top: -230px;
+}
+
+.line2{
+    margin-top: -200px;
+}
+
+.multiGame{
+    margin-top: -300px;
+    margin-left: 200px;
+    height: 280px;
+}
 
 .lock{
     display: none;
-}
-textarea{
-    cols: 50;
 }
