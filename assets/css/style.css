@@ -1,11 +1,34 @@
 body{
-    display: flexbox;
+    display: flex;
+    background-image: linear-gradient(white, white, white, white, white, blue);
+    background-repeat: repeat;
+    height: 50px;
 }
+
+.welcome{
+    background-color: gainsboro;
+    margin-top: 50px;
+}
+
+.getAlong{
+    height: 300px;
+    margin-left: 300px;
+}
+.getAlongPic{
+    margin-top: -220px;
+}
+
+.playBtn, .RPSassociation{
+    text-align: center;
+}
+
 .logo
 {
-    width: 200px;
+    width: 150px;
     height: auto;
 }
+
+
 .lock{
     display: none;
 }
