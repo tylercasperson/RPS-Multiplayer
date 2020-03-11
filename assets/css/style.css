@@ -69,26 +69,6 @@ body{
     display: none;
 }
 
-.chatArea{
-    display: flexbox;
-    margin-top: -300px;
-    margin-right: 100px;
-}
-
-.innerChat{
-    display: inline-block;
-}
-
-.title{
-    margin-bottom: 10px;
-    margin-top: -120px;
-}
-
-.chat{
-    height: 320px;
-    width: 280px;
-}
-
 .scoreRow{
     display: flexbox;
     margin-left: 980px;
