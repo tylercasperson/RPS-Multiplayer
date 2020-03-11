@@ -70,19 +70,23 @@ body{
 }
 
 .chatArea{
-    display: flex;
+    display: flexbox;
     margin-top: -300px;
     margin-right: 100px;
 }
 
+.innerChat{
+    display: inline-block;
+}
+
 .title{
+    margin-bottom: 10px;
     margin-top: -120px;
 }
 
-textarea{
+.chat{
     height: 320px;
-    width: 250px;
-    margin-top: -100px;
+    width: 280px;
 }
 
 .scoreRow{
