@@ -98,7 +98,7 @@ function getScores() {
         var currentRound = snapshot.val().RPSround;
         player1spot.text(pastPlayer1Score);
         player2spot.text(pastPlayer2Score);
-        round.text(currentRound);
+        $(".round").text(currentRound);
     }, function (error) {  
         console.log("Error: " + error.code);
     }) //end of error and get data
@@ -116,7 +116,7 @@ function getRound(){
 };
 
 function trackScore() {
-    var round = Number($(".round").text())
+    var round = Number($(".round").text());
     var player1score = Number($(".player1score").text());
     var player2score = Number($(".player2score").text());
     console.log('round: ' + round);
