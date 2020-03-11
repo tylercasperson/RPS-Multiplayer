@@ -17,8 +17,6 @@ I was really excited for this assignment. A few weeks prior, my instructor had a
 
     * The game will track each player's wins and losses.
 
-    * Throw some chat functionality in there! No online multiplayer game is complete without having to endure endless taunts and insults from your jerk opponent.
-
     * Styling and theme are completely up to you. Get Creative!
 
     * Deploy your assignment to Github Pages.
