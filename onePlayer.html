@@ -9,18 +9,38 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-    <h2>Instructions: Select 1/r, 2/p, or 3/s. Once you select your option, the computer will let you know it's answer. </h2>
-    <div class="container">
+    <div class="container singlePlayer">
         <div class="row">
-            <div class="col-md-offset-2 col-md-8">
-                <div class="jumbotron">
-                    <h2>You picked <span id="player1"><strong></strong></span></h2>
-                    <h2>The computer selected <span id="player2"><strong></strong></span></h2>
-                    <h2 id="roundScore"></h2>
+            <h4 class="col-md-12 instructions">Once you select your option, the computer will let you know it's answer. 
+                <div class="p1keyboard">Keyboard options:
+                    <ul>
+                        <li>rock: 1 or r</li>
+                        <li>paper: 2 or p</li>
+                        <li> scissors: 3 or s</li>
+                    </ul>
+                </div>
+            </h4>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-offset-2 col-md-8">
+                    <div class="jumbotron game">
+                        <h2>You picked <span id="player1"><strong></strong></span></h2>
+                        <h2>The computer selected <span id="player2"><strong></strong></span></h2>
+                        <h2 id="roundScore"></h2>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <div class="winningPic">
+            <img src="./assets/images/rockWins.jpg" alt="rockWins" class="winningPic rock hide">
+            <img src="./assets/images/paperBeatsRock.jpg" alt="paperWins" class="winningPic paper hide">
+            <img src="./assets/images/scissorsBeatsPaper.jpg" alt="scissorsWins" class="winningPic scissors hide">
+        </div>
     </div>
+
 
 <script type="text/javascript">
 
@@ -37,6 +57,10 @@
     function userSelection() {
         var userText = document.getElementById("player1");
         document.onkeyup = function(event) {
+            if(!(document.querySelector(".win") === null)){
+                document.querySelector(".win").classList.add("hide");
+                document.querySelector(".win").classList.remove("win");
+            };
             switch(event.key){
                 case 'r':
                 case '1':
@@ -82,18 +106,27 @@
         }
 
         document.getElementById("roundScore").textContent = (scoreBreakdown[player1selection + '-' + player2selection]);    
-    
+
+        var gamePlay = [player1selection + '-' + player2selection];
+
+        switch(gamePlay[0]){
+            case 'rock-scissors':
+            case 'scissors-rock':
+                document.querySelector(".rock").classList.remove("hide");
+                document.querySelector(".rock").classList.add("win");
+            break;
+            case 'rock-paper':
+            case 'paper-rock':
+                document.querySelector(".paper").classList.remove("hide");
+                document.querySelector(".paper").classList.add("win");
+            break;
+            case 'scissors-paper':
+            case 'paper-scissors':
+                document.querySelector(".scissors").classList.remove("hide");
+                document.querySelector(".scissors").classList.add("win");
+            break;
+        }
     };
-    
-
-    //https://ultimatecourses.com/blog/deprecating-the-switch-statement-for-object-literals
-
-
-
-    //add second player version. 
-    //switch statement to determine who won.
-    //firebase will keep track of the score
-    //random variable for chat functionality
 </script>
 </body>
 </html>
